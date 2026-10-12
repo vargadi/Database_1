@@ -10,7 +10,35 @@ GET http://localhost:3000/api/users
 ### Összes feladat lekérdezése (GET /api/tasks)
 GET http://localhost:3000/api/tasks
 
-### Kapcsolótábla lekérdezése taskokkal és userekkel (GET /api/usertasks)
+### Sikertelen bejelentkezés (rossz jelszó -> 401)
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "bence.kovacs@example.com",
+  "password": "rosszjelszo"
+}
+
+### Sikeres bejelentkezés (visszaadja a tokent)
+# @name loginRequest
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "bence.kovacs@example.com",
+  "password": "password123"
+}
+
+### Kapcsolótábla lekérdezése token NÉLKÜL (HIBAJELZÉS -> 401 Unauthorized)
 GET http://localhost:3000/api/taskusers
+
+### Kapcsolótábla lekérdezése érvénytelen tokennel (HIBAJELZÉS -> 403 Forbidden)
+GET http://localhost:3000/api/taskusers
+Authorization: Bearer ervenytelen-token
+
+### Kapcsolótábla lekérdezése a fenti loginből kapott tokennel (SIKERES)
+# A loginRequest válaszából automatikusan beilleszti a tokent:
+GET http://localhost:3000/api/taskusers
+Authorization: Bearer {{loginRequest.response.body.token}}
 
 
