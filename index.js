@@ -56,7 +56,7 @@ app.get('/api/tasks', async (req, res) => {
 });
 
 // Kapcsolótábla lekérdezése: Taskonként egy tömbben a hozzájuk rendelt felhasználók
-app.get('/api/usertasks', async (req, res) => {
+app.get('/api/taskusers', async (req, res) => {
   try {
     const tasksWithUsers = await Task.findAll({
       attributes: ['id', 'title'],

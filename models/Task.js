@@ -20,4 +20,6 @@ export const Task = sequelize.define('Task', {
     defaultValue: 'medium',
     allowNull: false,
   },
+}, {
+  timestamps: false,
 });
